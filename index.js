@@ -35,7 +35,7 @@ if (cluster.isPrimary) {
 
 dotenv.config();
 
-http.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("we are listening");
 });
 
