@@ -6,7 +6,7 @@ const axios = require("axios");
 dotenv.config();
 
 app.get("/", (req, res) => {
-  res.send("we are listening");
+  res.send("we are listening on 9001");
 });
 
 var server = app.listen(process.env.PORT || 9001, () => {
