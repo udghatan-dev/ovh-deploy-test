@@ -9,6 +9,12 @@ const process = require("node:process");
 
 const numCPUs = cpus().length;
 
+dotenv.config();
+
+app.get("/", (req, res) => {
+  res.send("we are listening");
+});
+
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);
 
@@ -23,22 +29,9 @@ if (cluster.isPrimary) {
 } else {
   // Workers can share any TCP connection
   // In this case it is an HTTP server
-  http
-    .createServer((req, res) => {
-      res.writeHead(200);
-      res.end("hello world\n");
-    })
-    .listen(process.env.PORT || 9001);
+  var server = app.listen(process.env.PORT || 9001, () => {
+    console.log("welcome to wa team backend we are listening on " + process.env.PORT || 9001);
+  });
 
   console.log(`Worker ${process.pid} started`);
 }
-
-dotenv.config();
-
-app.get("/", (req, res) => {
-  res.send("we are listening");
-});
-
-// var server = app.listen(process.env.PORT || 9001, () => {
-//   console.log("welcome to wa team backend we are listening on " + process.env.PORT || 9001);
-// });
