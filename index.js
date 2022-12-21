@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const axios = require("axios");
 
 dotenv.config();
 
 app.get("/", (req, res) => {
-  res.send("we are running");
+  res.send("we are listening");
 });
 
 var server = app.listen(process.env.PORT || 9001, () => {
